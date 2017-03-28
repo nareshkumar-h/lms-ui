@@ -6,21 +6,19 @@
                     <h3 class="panel-title">Please Log In</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="form" name="form" ng-submit="ctrl.login()">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Employee ID" name="emp_id" autofocus>
+                                <input class="form-control" placeholder="Employee ID" name="emp_id" autofocus ng-model="ctrl.username">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input class="form-control" placeholder="Password" name="password" type="password" ng-model="ctrl.password">
                             </div>
                             <div class="checkbox">
-                                <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
+                              <a href="#!/register">Or Register Here</a>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                            <button class="btn btn-success btn-block" type="submit">Login</button>
                         </fieldset>
                     </form>
                 </div>
