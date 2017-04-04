@@ -9,7 +9,7 @@ app
 		function ($scope, holidayService,DTOptionsBuilder, DTColumnDefBuilder) {
 			var self = this;
 
-			self.holiday = new holidayService();
+			
 			self.holidays = [];
 
 			self.fetchAllHolidays = function () {

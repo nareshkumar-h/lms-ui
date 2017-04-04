@@ -24,6 +24,7 @@
 
     <!-- Custom Fonts -->
     <link href="resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,7 +54,8 @@
 
             <ul class="nav navbar-top-links navbar-right">
 
-                <li class="dropdown">
+
+                <li class="dropdown pull-right text-muted">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -63,7 +65,7 @@
                         <li><a href=""><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#!/login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a ui-sref="login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -87,14 +89,26 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#!/dashboard"><i class="fa fa-home fa-fw"></i> Home</a>
+                            <a ui-sref="dashboard"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
 
                         <li>
-                            <a href="#!/holidaymaster"><i class="fa fa-table fa-fw"></i>Holiday Master</a>
+                            <a ui-sref="holidaymaster"><i class="fa fa-table fa-fw"></i>Holiday Master</a>
                         </li>
                         <li>
-                            <a href="#!/history"><i class="fa fa-files-o fa-fw"></i>Leave History</a>
+                            <a ui-sref="history"><i class="fa fa-files-o fa-fw"></i>Leave History</a>
+                        </li>
+                        <li>
+                            <a ui-sref="employee/create"><i class="fa fa-user fa-fw"></i>Create an Employee</a>
+                        </li>
+                        <li>
+                            <a ui-sref="employee/edit"><i class="fa fa-users fa-fw"></i>Manage Employees</a>
+                        </li>
+                        <li>
+                            <a ui-sref="teams" ><i class="fa fa-compress fa-fw"></i>Manage Teams</a>
+                        </li>
+                        <li>
+                            <a ui-sref="requests" access="admin"><i class="fa fa-bell fa-fw"></i>Team Requests</a>
                         </li>
                     </ul>
                 </div>
@@ -138,16 +152,22 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="resources/js/angular-datatables.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script type="text/javascript" src= "resources/js/angular-datatables.min.js" ></script>
     <script type="text/javascript" src="resources/js/app.js"></script>
     <script type="text/javascript" src="resources/js/holiday_controller.js"></script>
     <script type="text/javascript" src="resources/js/dashboard_controller.js"></script>
+    <script type="text/javascript" src="resources/js/leave_history_controller.js"></script>
     <script type="text/javascript" src="resources/js/holiday_service.js"></script>
+    <script type="text/javascript" src="resources/js/leave_detail_service.js"></script>
     <script type="text/javascript" src="resources/js/auth_service.js"></script>
     <script type="text/javascript" src="resources/js/login_controller.js"></script>
     <script type="text/javascript" src="resources/js/registration_controller.js"></script>
     <script type="text/javascript" src="resources/js/user_service.js"></script>
-    <script type="text/javascript" src="resources/js/sort_by_month.js"></script>>
+    <script type="text/javascript" src="resources/js/sort_by_month.js"></script>
 
 </body>
 

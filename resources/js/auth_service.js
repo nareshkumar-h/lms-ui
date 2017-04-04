@@ -1,7 +1,7 @@
 app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', 'userService', function ($http, $cookies, $rootScope, $timeout, userService) {
     var service = {};
     var authenticated=false;
-    
+    /*var URI='http://52.221.151.239';*/
 
     service.Login = Login;
     service.SetCredentials = SetCredentials;
@@ -10,12 +10,15 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', 'user
     service.setAuth=setAuth;
 
     return service;
+
     function isAuthenticated(){
         return authenticated;
     }
+
     function setAuth(){
         authenticated=true;
     }
+
     function Login(username, password, callback) {
         console.log('AuthService');
 
@@ -33,13 +36,14 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', 'user
                     callback(response);
                 });
         }, 1000);
-      authenticated=true;
+      
         /* Use this for real authentication
          ----------------------------------------------*/
-        //$http.post('/api/authenticate', { username: username, password: password })
-        //    .success(function (response) {
-        //        callback(response);
-        //    });
+        /*$http.post(URI+'/employees/login', { code: username, password: password })
+            .success(function (response) {
+                callback(response);
+            }); */
+        authenticated=true;
        
     }
 

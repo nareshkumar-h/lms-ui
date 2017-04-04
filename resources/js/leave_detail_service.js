@@ -1,8 +1,6 @@
-/**
- * 
- */
-app.factory('holidayService',['$resource', function ($resource) {
-	var URI='http://52.221.151.239/holidays:id';
+app.factory('leaveService',['$resource', function ($resource) {
+
+	var URI='http://localhost:3000/leaveDetails:id';
    return $resource(
             URI, 
             {id: '@id'},

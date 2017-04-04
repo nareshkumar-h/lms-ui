@@ -11,25 +11,22 @@
             <div class="panel-heading">
                 <h4>Apply for your Leave:</h4>
                 <div class="form-group">
-                    <label>Select Date</label>
-                    <input type="date" max="12-31-2017" min="01-01-2017">
-                    <label>Number of Days</label>
-                    <input type="number" min="1" max="30">
-                    <label>Leave Type</label>
-                    <select name="leavetype">
-   								 <option value="pl">Paid Leave</option>
-    							 <option value="cl">Casual Leave</option>
-    							 <option value="sl">Sick Leave</option>
-    							<option value="prl">Privileged Leave</option>
-    							<option value="ml">Maternity Leave</option>
-    							<option value="ptl">Paternity Leave</option>
-  								</select>
-                    <label>Cause:(optional)</label>
-                    <input type="text">
-                    <input class="btn btn-default" type="submit" value="Apply">
+                    <form role="form" name="form" ng-submit="ctrl.applyLeave()">
+                        <label>Select Date</label>
+                        <md-datepicker ng-model="ctrl.leaveDetail.fromDate" md-date-filter="ctrl.onlyWeekDaysPredicate"></md-datepicker>
+                        <label>Number of Days</label>
+                        <input type="number" min="0.5" max="90" step="0.5" ng-model="ctrl.leaveDetail.noOfDays">
+                        <label>Leave Type</label>
+                        <select name="leavetype" ng-model="ctrl.leaveDetail.leaveType" ng-options="x.type for x in ctrl.leaveTypes">
+   							
+  					    </select>
+                        <label>Purpose:</label>
+                        <input type="text" placeholder="(Optional)">
+                        <input class="btn btn-default" type="submit" value="Apply"/>
+                    </form>
                 </div>
                 <div>
-                    <a href="">To cancel any applied leave click here.</a>
+                    <a ui-sref="history">To cancel any applied leave click here.</a>
                 </div>
             </div>
         </div>
@@ -47,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a ui-sref="history">
                 <div class="panel-footer">
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <span class="pull-right">View Details &nbsp</span>
@@ -67,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a ui-sref="history">
                 <div class="panel-footer">
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <span class="pull-right">View Details &nbsp</span>
@@ -85,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a ui-sref="history">
                 <div class="panel-footer">
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <span class="pull-right">View Details &nbsp</span>
@@ -105,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a ui-sref="history">
                 <div class="panel-footer">
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <span class="pull-left">View Details &nbsp</span>
@@ -122,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a ui-sref="history">
                 <div class="panel-footer">
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <span class="pull-right">View Details &nbsp</span>
@@ -142,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a ui-sref="history">
                 <div class="panel-footer">
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                     <span class="pull-right">View Details &nbsp</span>
