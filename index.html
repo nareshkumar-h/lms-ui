@@ -32,6 +32,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+    var API="http://192.168.2.12:5000/"
+    </script>
 
 </head>
 
@@ -105,7 +108,7 @@
                             <a ui-sref="employee/edit"><i class="fa fa-users fa-fw"></i>Manage Employees</a>
                         </li>
                         <li>
-                            <a ui-sref="teams" ><i class="fa fa-compress fa-fw"></i>Manage Teams</a>
+                            <a ui-sref="teams"><i class="fa fa-compress fa-fw"></i>Manage Teams</a>
                         </li>
                         <li>
                             <a ui-sref="requests" access="admin"><i class="fa fa-bell fa-fw"></i>Team Requests</a>
@@ -156,11 +159,13 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script type="text/javascript" src= "resources/js/angular-datatables.min.js" ></script>
+    <script type="text/javascript" src="resources/js/angular-datatables.min.js"></script>
     <script type="text/javascript" src="resources/js/app.js"></script>
     <script type="text/javascript" src="resources/js/holiday_controller.js"></script>
     <script type="text/javascript" src="resources/js/dashboard_controller.js"></script>
     <script type="text/javascript" src="resources/js/leave_history_controller.js"></script>
+    <script type="text/javascript" src="resources/js/create_controller.js"></script>
+    <script type="text/javascript" src="resources/js/edit_controller.js"></script>
     <script type="text/javascript" src="resources/js/holiday_service.js"></script>
     <script type="text/javascript" src="resources/js/leave_detail_service.js"></script>
     <script type="text/javascript" src="resources/js/auth_service.js"></script>

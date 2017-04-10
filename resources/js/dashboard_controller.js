@@ -7,12 +7,11 @@ app.controller('dashboardController', ['userService', '$rootScope', '$http', '$l
         self.leaveTypes = response.data;
     });
     var status = null;
-    $http.get('http://52.221.151.239/leavestatus/1').then(function (response) {
+    $http.get(API+'leavestatus/1').then(function (response) {
         console.log(JSON.stringify(response.data));
         status = response.data;
     })
     self.user = null;
-
 
     initController();
 
@@ -29,7 +28,7 @@ app.controller('dashboardController', ['userService', '$rootScope', '$http', '$l
         self.leaveDetail.toDate = addSkippingWeekends(self.leaveDetail.fromDate, Math.ceil(self.leaveDetail.noOfDays));
         self.leaveDetail.status = status;
         console.log(self.leaveDetail);
-        save();
+        //leaveService.save(self.leaveDetail);
         console.log('Applied');
         $location.path('/history');
     }
@@ -43,13 +42,6 @@ app.controller('dashboardController', ['userService', '$rootScope', '$http', '$l
             .then(function (user) {
                 self.user = user;
             });
-    }
-
-
-    function save() {
-        $http.post('http://192.168.2.55:3000/leaveDetails', self.leaveDetail).then(function (response) {
-            console.log(JSON.stringify(response.data))
-        });
     }
 
     function addSkippingWeekends(dateToAdd, noOfDaysToAdd) {

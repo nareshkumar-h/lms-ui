@@ -2,7 +2,7 @@
  * 
  */
 app.factory('holidayService',['$resource', function ($resource) {
-	var URI='http://52.221.151.239/holidays:id';
+	var URI=API+'holidays:id';
    return $resource(
             URI, 
             {id: '@id'},

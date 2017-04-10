@@ -65,14 +65,16 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         .state('employee/create', {
             url: '/employee/create',
             templateUrl: 'create.html',
+            controller: 'createController as ctrl',
             authenticate: true
         })
         .state('employee/edit', {
             url: '/employee/edit',
             templateUrl: 'edit.html',
+            controller: 'editController as ctrl',
             authenticate: true
         })
-     .state('teams', {
+        .state('teams', {
             url: '/teams',
             templateUrl: 'teams.html',
             authenticate: true
