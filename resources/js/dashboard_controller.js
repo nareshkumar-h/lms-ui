@@ -26,10 +26,9 @@ app.controller('dashboardController', ['leaveService', 'userService', '$rootScop
         self.leaveDetail.appliedDate = new Date();
         self.leaveDetail.toDate = new Date();
         self.leaveDetail.toDate = addSkippingWeekends(self.leaveDetail.fromDate, Math.ceil(self.leaveDetail.noOfDays));
+        //self.leaveDetail.toDate=convertDate(self.leaveDetail.toDate);
+//self.leaveDetail.fromDate=convertDate(self.leaveDetail.fromDate);
         self.leaveDetail.status = status;
-        self.leaveDetail.toDate = JSON.stringify(self.leaveDetail.toDate);
-        self.leaveDetail.fromDate = JSON.stringify(self.leaveDetail.toDate);
-        self.leaveDetail.appliedDate = JSON.stringify(self.leaveDetail.toDate);
         console.log(self.leaveDetail);
         leaveService.save(self.leaveDetail);
         console.log('Applied');
@@ -68,6 +67,12 @@ app.controller('dashboardController', ['leaveService', 'userService', '$rootScop
         }
         //console.log(addedDate.toString());
         return addedDate;
+    }
+    function convertDate(date){
+        var monthIndex=date.getMonth();
+        monthIndex+=1;
+        var str=date.getDate()+'-'+monthIndex+'-'+date.getFullYear();
+        return str;
     }
 
 }]);
