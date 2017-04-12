@@ -1,13 +1,13 @@
-app.controller('dashboardController', ['userService', '$rootScope', '$http', '$location', function (userService, $rootScope, $http, $location) {
+app.controller('dashboardController', ['leaveService', 'userService', '$rootScope', '$http', '$location', function (leaveService, userService, $rootScope, $http, $location) {
 
     var self = this;
-    self.leaveDetail ={};
+    self.leaveDetail = {};
     $http.get('data/leaveTypes.json').then(function (response) {
         console.log(JSON.stringify(response.data));
         self.leaveTypes = response.data;
     });
     var status = null;
-    $http.get(API+'leavestatus/1').then(function (response) {
+    $http.get(API + 'leavestatus/1').then(function (response) {
         console.log(JSON.stringify(response.data));
         status = response.data;
     })
@@ -17,7 +17,7 @@ app.controller('dashboardController', ['userService', '$rootScope', '$http', '$l
 
     function initController() {
         loadCurrentUser();
-        self.leaveDetail.fromDate=new Date();
+        self.leaveDetail.fromDate = new Date();
 
     }
     self.applyLeave = function () {
@@ -27,8 +27,11 @@ app.controller('dashboardController', ['userService', '$rootScope', '$http', '$l
         self.leaveDetail.toDate = new Date();
         self.leaveDetail.toDate = addSkippingWeekends(self.leaveDetail.fromDate, Math.ceil(self.leaveDetail.noOfDays));
         self.leaveDetail.status = status;
+        self.leaveDetail.toDate = JSON.stringify(self.leaveDetail.toDate);
+        self.leaveDetail.fromDate = JSON.stringify(self.leaveDetail.toDate);
+        self.leaveDetail.appliedDate = JSON.stringify(self.leaveDetail.toDate);
         console.log(self.leaveDetail);
-        //leaveService.save(self.leaveDetail);
+        leaveService.save(self.leaveDetail);
         console.log('Applied');
         $location.path('/history');
     }
@@ -38,10 +41,12 @@ app.controller('dashboardController', ['userService', '$rootScope', '$http', '$l
     };
 
     function loadCurrentUser() {
-        userService.GetByUsername($rootScope.globals.currentUser.username)
-            .then(function (user) {
-                self.user = user;
-            });
+        /* userService.GetByUsername($rootScope.globals.currentUser.username)
+             .then(function (user) {
+                 self.user = user;
+             });*/
+        self.user = $rootScope.globals.currentUser.object;
+        console.log(JSON.stringify(self.user));
     }
 
     function addSkippingWeekends(dateToAdd, noOfDaysToAdd) {
@@ -53,10 +58,10 @@ app.controller('dashboardController', ['userService', '$rootScope', '$http', '$l
 
                 noOfDaysToAdd++;
             }
-           
+
 
             noOfDaysToAdd--;
-     
+
             dateToAdd = addedDate;
             //console.log("inside loop");
 

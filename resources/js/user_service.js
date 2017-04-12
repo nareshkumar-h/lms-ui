@@ -3,8 +3,9 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
 
     service.GetAll = GetAll;
     service.GetById = GetById;
-    service.GetByUsername = GetByUsername;
+   // service.GetByUsername = GetByUsername;
     service.Create = Create;
+   // service.Createlocal=Createlocal;
     service.Update = Update;
     service.Delete = Delete;
 
@@ -29,22 +30,30 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
 
     function GetById(id) {
         var deferred = $q.defer();
-        var filtered = $filter('filter')(getUsers(), { id: id });
-        var user = filtered.length ? filtered[0] : null;
-        deferred.resolve(user);
+         $http.get(API + 'employees/'+id)
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (errResponse) {
+                console.error('Error while fetching the user');
+                deferred.reject(errResponse);
+            }
+            );
         return deferred.promise;
+      
     }
 
-    function GetByUsername(username) {
+    /*function GetByUsername(username) {
         console.log('get- user service');
         var deferred = $q.defer();
         var filtered = $filter('filter')(getUsers(), { username: username });
         var user = filtered.length ? filtered[0] : null;
         deferred.resolve(user);
         return deferred.promise;
-    }
+    }*/
 
-    /* function Create(user) {
+     /*function Createlocal(user) {
          var deferred = $q.defer();
  
          // simulate api call with $timeout
@@ -145,9 +154,9 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
 // private functions
 
 function handleSuccess(res) {
-    // console.log('sdfsf')
+    alert('Record Saved');
 }
 
 function handleError(error) {
-    //console.log('fafsfsdfsdfasfdfail');
+    alert('Error in saving records.');
 }

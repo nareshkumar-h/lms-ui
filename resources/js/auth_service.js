@@ -1,59 +1,76 @@
-app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', 'userService', function ($http, $cookies, $rootScope, $timeout, userService) {
+app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$location','userService', function ($http, $cookies, $rootScope, $timeout,$location,userService) {
     var service = {};
-    var authenticated=false;
+    var authenticated = false;
     /*var URI='http://52.221.151.239';*/
 
     service.Login = Login;
     service.SetCredentials = SetCredentials;
     service.ClearCredentials = ClearCredentials;
-    service.isAuthenticated=isAuthenticated;
-    service.setAuth=setAuth;
+    service.isAuthenticated = isAuthenticated;
+    service.setAuth = setAuth;
 
     return service;
 
-    function isAuthenticated(){
+    function isAuthenticated() {
         return authenticated;
     }
 
-    function setAuth(){
-        authenticated=true;
+    function setAuth() {
+        authenticated = true;
     }
 
     function Login(username, password, callback) {
         console.log('AuthService');
-
+        console.log(username + ' ' + password);
         /* Dummy authentication for testing, uses $timeout to simulate api call
          ----------------------------------------------*/
-        $timeout(function () {
-            var response;
-            userService.GetByUsername(username)
-                .then(function (user) {
-                    if (user !== null && user.password === password) {
-                        response = { success: true };
-                    } else {
-                        response = { success: false, message: 'Username or password is incorrect' };
-                    }
-                    callback(response);
-                });
-        }, 1000);
-      
+       /* $timeout(function () {
+             var response;
+             userService.GetByUsername(username)
+                 .then(function (user) {
+                     if (user !== null && user.password === password) {
+                         response = { success: true };
+                     } else {
+                         response = { success: false, message: 'Username or password is incorrect' };
+                     }
+                     callback(response);
+                 });
+         }, 1000);
+         authenticated=true;*/
         /* Use this for real authentication
          ----------------------------------------------*/
-        /*$http.post(URI+'/employees/login', { code: username, password: password })
-            .success(function (response) {
-                callback(response);
-            }); */
-        authenticated=true;
-       
+        var data = $.param({
+            emailId: username,
+            password: password
+        });
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+        $http.post(API + 'employees/login', data, config).then(successCallback, errorCallback);
+        function successCallback(response) {
+            authenticated = true;
+            console.log(JSON.stringify(response.data));
+            SetCredentials(response.data);
+            $location.path('/dashboard')
+        }
+        function errorCallback(error) {
+            console.error('Login Failed.')
+        }
+
+        
+
     }
 
-    function SetCredentials(username, password) {
+    function SetCredentials(data) {
         console.log('auth.setCredentials');
-        var authdata = Base64.encode(username + ':' + password);
+        console.log(data.emailId+'');
+        var authdata = Base64.encode(data.emailId + ':' +data.password);
 
         $rootScope.globals = {
             currentUser: {
-                username: username,
+                object: data,
                 authdata: authdata
             }
         };
@@ -71,15 +88,15 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', 'user
         $rootScope.globals = {};
         $cookies.remove('globals');
         $http.defaults.headers.common.Authorization = 'Basic';
-        authenticated=false;
+        authenticated = false;
     }
 }
 
 
 
 ]);
-    // Base64 encoding service used by AuthenticationService
-    var Base64 = {
+// Base64 encoding service used by AuthenticationService
+var Base64 = {
 
     keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
 

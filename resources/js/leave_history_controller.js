@@ -14,17 +14,14 @@ app
             }
 
             function fetchAllLeaveDetails() {
-                $http.get('http://localhost:3000/leaveDetails').then(function (response) {
-                    self.leaveDetails = response.data;
+                leaveService.getLeaveForEmployee(self.user.id).then(function (d) {
+                    self.leaveDetails = d;
                     console.log(JSON.stringify(self.leaveDetails));
                 });
             };
 
             function loadCurrentUser() {
-                userService.GetByUsername($rootScope.globals.currentUser.username)
-                    .then(function (user) {
-                        self.user = user;
-                    });
+               self.user=$rootScope.globals.currentUser.object;
             }
           
 

@@ -90,12 +90,5 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             controller: 'loginController as ctrl',
             authenticate: false
         })
-        .state('register', {
-            url: '/register',
-            templateUrl: 'register.html',
-            controller: 'registrationController as ctrl',
-            authenticate: false
-        })
-
 
 }]);

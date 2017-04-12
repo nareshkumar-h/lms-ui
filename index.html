@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="home">RevSys</a>
+                <a class="navbar-brand" href="">RevSys</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -65,7 +65,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href=""><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href=""><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href=""><i class="fa fa-gear fa-fw"></i>Change Password</a>
                         </li>
                         <li class="divider"></li>
                         <li><a ui-sref="login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -92,27 +92,29 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a ui-sref="dashboard"><i class="fa fa-home fa-fw"></i> Home</a>
+                            <a ui-sref="dashboard" ><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
 
                         <li>
-                            <a ui-sref="holidaymaster"><i class="fa fa-table fa-fw"></i>Holiday Master</a>
+                            <a ui-sref="holidaymaster" ><i class="fa fa-table fa-fw"></i>Holiday Master</a>
                         </li>
                         <li>
-                            <a ui-sref="history"><i class="fa fa-files-o fa-fw"></i>Leave History</a>
+                            <a ui-sref="history" ><i class="fa fa-files-o fa-fw"></i>Leave History</a>
+                        
                         </li>
                         <li>
-                            <a ui-sref="employee/create"><i class="fa fa-user fa-fw"></i>Create an Employee</a>
+                            <a ui-sref="requests" ><i class="fa fa-bell fa-fw"></i>Team Requests</a>
                         </li>
                         <li>
-                            <a ui-sref="employee/edit"><i class="fa fa-users fa-fw"></i>Manage Employees</a>
+                            <a ui-sref="employee/create" ><i class="fa fa-user fa-fw"></i>Create an Employee</a>
                         </li>
                         <li>
-                            <a ui-sref="teams"><i class="fa fa-compress fa-fw"></i>Manage Teams</a>
+                            <a ui-sref="employee/edit" ><i class="fa fa-users fa-fw"></i>Manage Employees</a>
                         </li>
                         <li>
-                            <a ui-sref="requests" access="admin"><i class="fa fa-bell fa-fw"></i>Team Requests</a>
+                            <a ui-sref="teams" access="admin"><i class="fa fa-compress fa-fw"></i>Manage Teams</a>
                         </li>
+                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -155,19 +157,16 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
-<<<<<<< HEAD
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script type="text/javascript" src="resources/js/angular-datatables.min.js"></script>
-=======
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script type="text/javascript" src= "resources/js/angular-datatables.min.js" ></script>
->>>>>>> 096d1d6544cd18a0a993b9487bfef1d9f2b215a3
     <script type="text/javascript" src="resources/js/app.js"></script>
     <script type="text/javascript" src="resources/js/holiday_controller.js"></script>
     <script type="text/javascript" src="resources/js/dashboard_controller.js"></script>
@@ -178,7 +177,6 @@
     <script type="text/javascript" src="resources/js/leave_detail_service.js"></script>
     <script type="text/javascript" src="resources/js/auth_service.js"></script>
     <script type="text/javascript" src="resources/js/login_controller.js"></script>
-    <script type="text/javascript" src="resources/js/registration_controller.js"></script>
     <script type="text/javascript" src="resources/js/user_service.js"></script>
     <script type="text/javascript" src="resources/js/sort_by_month.js"></script>
 

@@ -29,9 +29,9 @@
                         <tbody>
                             <tr class="odd gradeX" ng-repeat="holiday in ctrl.holidays">
 
-                                <td>{{holiday.holidayDate.dayOfMonth}}</td>
-                                <td>{{holiday.holidayDate.month}}</td>
-                                <td>{{holiday.holidayDate.dayOfWeek}}</td>
+                                <td>{{holiday.holidayDate | date:"dd"}}</td>
+                                <td>{{holiday.holidayDate | date:"MMMM"|uppercase}}</td>
+                                <td>{{holiday.holidayDate | date:"EEEE"}}</td>
                                 <td>{{holiday.status}}</td>
                         </tbody>
                     </table>

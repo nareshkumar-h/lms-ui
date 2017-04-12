@@ -22,10 +22,10 @@ app.controller('editController', ['userService', '$http', function (userService,
 
     };
     self.save = function () {
-        self.employee.role.createdDate = null;
+        /*self.employee.role.createdDate = null;
         self.employee.role.modifiedDate = null;
         self.employee.createdDate=null;
-        self.employee.modifiedDate=null;
+        self.employee.modifiedDate=null;*/
         console.log('save called');
         console.log(JSON.stringify(self.employee));
         userService.Update(self.employee)
