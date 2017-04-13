@@ -1,4 +1,4 @@
-app.controller('loginController', ['$location', 'authService', function ($location,authService) {
+app.controller('loginController', ['$window','$location', 'authService', function ($window,$location,authService) {
     var self = this;
 
     self.login = login;
@@ -6,11 +6,13 @@ app.controller('loginController', ['$location', 'authService', function ($locati
     (function initController() {
         // reset login status
         authService.ClearCredentials();
+        
     })();
 
     function login() {
         console.log('Controller')
         authService.Login(self.username, self.password);
+        
     }
 
 

@@ -33,7 +33,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-    var API="http://192.168.2.12:5000/"
+    var API="http://localhost:5000/"
     </script>
 
 </head>
@@ -91,28 +91,28 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <li>
+                        <li access="group1">
                             <a ui-sref="dashboard" ><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
 
                         <li>
-                            <a ui-sref="holidaymaster" ><i class="fa fa-table fa-fw"></i>Holiday Master</a>
+                            <a ui-sref="holidaymaster"><i class="fa fa-table fa-fw"></i>Holiday Master</a>
                         </li>
-                        <li>
-                            <a ui-sref="history" ><i class="fa fa-files-o fa-fw"></i>Leave History</a>
+                        <li access="group1">
+                            <a ui-sref="history"><i class="fa fa-files-o fa-fw"></i>Leave History</a>
                         
                         </li>
-                        <li>
+                        <li access="group3">
                             <a ui-sref="requests" ><i class="fa fa-bell fa-fw"></i>Team Requests</a>
                         </li>
-                        <li>
+                        <li access="group2">
                             <a ui-sref="employee/create" ><i class="fa fa-user fa-fw"></i>Create an Employee</a>
                         </li>
-                        <li>
+                        <li access="group2">
                             <a ui-sref="employee/edit" ><i class="fa fa-users fa-fw"></i>Manage Employees</a>
                         </li>
-                        <li>
-                            <a ui-sref="teams" access="admin"><i class="fa fa-compress fa-fw"></i>Manage Teams</a>
+                        <li access="group2">
+                            <a ui-sref="teams"><i class="fa fa-compress fa-fw"></i>Manage Teams</a>
                         </li>
                         
                     </ul>
@@ -175,6 +175,7 @@
     <script type="text/javascript" src="resources/js/edit_controller.js"></script>
     <script type="text/javascript" src="resources/js/holiday_service.js"></script>
     <script type="text/javascript" src="resources/js/leave_detail_service.js"></script>
+    <script type="text/javascript" src="resources/js/leave_counter.js"></script>
     <script type="text/javascript" src="resources/js/auth_service.js"></script>
     <script type="text/javascript" src="resources/js/login_controller.js"></script>
     <script type="text/javascript" src="resources/js/user_service.js"></script>

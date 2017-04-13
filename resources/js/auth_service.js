@@ -1,6 +1,7 @@
-app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$location','userService', function ($http, $cookies, $rootScope, $timeout,$location,userService) {
+app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$window','$location','userService', function ($http, $cookies, $rootScope, $timeout,$window,$location,userService) {
     var service = {};
     var authenticated = false;
+    var authorized=false;
     /*var URI='http://52.221.151.239';*/
 
     service.Login = Login;
@@ -8,7 +9,7 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$loca
     service.ClearCredentials = ClearCredentials;
     service.isAuthenticated = isAuthenticated;
     service.setAuth = setAuth;
-
+    service.isAuthorized=isAuthorized;
     return service;
 
     function isAuthenticated() {
@@ -19,6 +20,10 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$loca
         authenticated = true;
     }
 
+    function isAuthorized(role){
+            return(role===$rootScope.globals.currentUser.level);
+             
+    }
     function Login(username, password, callback) {
         console.log('AuthService');
         console.log(username + ' ' + password);
@@ -53,7 +58,15 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$loca
             authenticated = true;
             console.log(JSON.stringify(response.data));
             SetCredentials(response.data);
+            if(response.data.role.id===1)
+            {
+                $location.path('/employee/create');
+            }
+            else
+            {
             $location.path('/dashboard')
+        }
+        $window.location.reload();
         }
         function errorCallback(error) {
             console.error('Login Failed.')
@@ -65,12 +78,27 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$loca
 
     function SetCredentials(data) {
         console.log('auth.setCredentials');
-        console.log(data.emailId+'');
+        console.log(data.emailId+' '+data.role.name);
+        var levelIndex;
+        if(data.role.id===1){
+            levelIndex="System";
+        }
+        else if(data.role.id===2||data.role.id===3||data.role.id===4||data.role.id===5||data.role.id===6||data.role.id===7){
+            levelIndex="Level2";
+        }
+        else if(data.role.id===8||data.role.id==9){
+            levelIndex="Level1";
+        }
+        else{
+            levelIndex="Default";
+        }
+        console.log(levelIndex);
         var authdata = Base64.encode(data.emailId + ':' +data.password);
 
         $rootScope.globals = {
             currentUser: {
                 object: data,
+                level:levelIndex,
                 authdata: authdata
             }
         };
@@ -85,10 +113,13 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$loca
     }
 
     function ClearCredentials() {
-        $rootScope.globals = {};
+        authenticated=false;
+        authorized=false;
+        $rootScope.globals={};
         $cookies.remove('globals');
         $http.defaults.headers.common.Authorization = 'Basic';
-        authenticated = false;
+        
+        
     }
 }
 

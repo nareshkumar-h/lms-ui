@@ -1,6 +1,8 @@
-app.controller('dashboardController', ['leaveService', 'userService', '$rootScope', '$http', '$location', function (leaveService, userService, $rootScope, $http, $location) {
+app.controller('dashboardController', ['leaveService','leaveCounter','userService', '$rootScope', '$http', '$location', function (leaveService,leaveCounter,userService, $rootScope, $http, $location) {
 
     var self = this;
+    self.m=false;
+    self.f=false;
     self.leaveDetail = {};
     $http.get('data/leaveTypes.json').then(function (response) {
         console.log(JSON.stringify(response.data));
@@ -18,16 +20,26 @@ app.controller('dashboardController', ['leaveService', 'userService', '$rootScop
     function initController() {
         loadCurrentUser();
         self.leaveDetail.fromDate = new Date();
-
+        if(self.user.gender==="M")
+        {
+           self.m=true;
+        }
+        else{
+            self.f=true;
+        }
+        leaveCounter.count();
+        leaveService.getRollLeaves(self.user.role.id).then(function(d){
+            self.leaveForEmployeeRole=d;
+        })
     }
     self.applyLeave = function () {
 
         self.leaveDetail.employee = self.user;
-        self.leaveDetail.appliedDate = new Date();
+        self.leaveDetail.appliedDate = convertDate(new Date());
         self.leaveDetail.toDate = new Date();
         self.leaveDetail.toDate = addSkippingWeekends(self.leaveDetail.fromDate, Math.ceil(self.leaveDetail.noOfDays));
-        //self.leaveDetail.toDate=convertDate(self.leaveDetail.toDate);
-//self.leaveDetail.fromDate=convertDate(self.leaveDetail.fromDate);
+        self.leaveDetail.toDate=convertDate(self.leaveDetail.toDate);
+        self.leaveDetail.fromDate=convertDate(self.leaveDetail.fromDate);
         self.leaveDetail.status = status;
         console.log(self.leaveDetail);
         leaveService.save(self.leaveDetail);

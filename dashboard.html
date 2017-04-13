@@ -39,7 +39,7 @@
                 <div class="row">
 
                     <div class="col-xs-9 ">
-                        <div class="huge">0</div>
+                        <div class="huge">{{ctrl.leaveForEmployeeRole.paid_leave}}</div>
                         <div>Paid Leaves left</div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="row">
 
                     <div class="col-xs-9">
-                        <div class="huge">0</div>
+                        <div class="huge">{{ctrl.leaveForEmployeeRole.casual_leave}}</div>
                         <div>Casual Leaves left</div>
                     </div>
                 </div>
@@ -77,7 +77,8 @@
                 <div class="row">
 
                     <div class="col-xs-9">
-                        <div class="huge">0</div>
+                        <div class="huge" ng-show="ctrl.f">{{ctrl.leaveForEmployeeRole.maternity_leave}}</div>
+                        <div class="huge" ng-show="ctrl.m">N/A</div>                        
                         <div>Maternity Leaves left</div>
                     </div>
                 </div>
@@ -97,7 +98,7 @@
                 <div class="row">
 
                     <div class="col-xs-9">
-                        <div class="huge">0</div>
+                        <div class="huge">{{ctrl.leaveForEmployeeRole.sick_leave}}</div>
                         <div>Sick Leaves left</div>
                     </div>
                 </div>
@@ -114,7 +115,8 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-9">
-                        <div class="huge">0</div>
+                        <div class="huge" ng-show="ctrl.m">{{ctrl.leaveForEmployeeRole.paternity_leave}}</div>
+                        <div class="huge" ng-show="ctrl.f">N/A</div>
                         <div>Paternity Leaves left</div>
                     </div>
                 </div>
@@ -134,7 +136,7 @@
                 <div class="row">
 
                     <div class="col-xs-9">
-                        <div class="huge">0</div>
+                        <div class="huge">{{ctrl.leaveForEmployeeRole.privileged_leave}}</div>
                         <div>Privileged Leaves left</div>
                     </div>
                 </div>
