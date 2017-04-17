@@ -5,12 +5,12 @@
 </div>
 <div class="row">
     <div class="col-lg-6">
-     Select an employee <select>
+     Select an employee <select ng-model="ctrl.employee" ng-options="x.name for x in ctrl.employees">
         </select>
     </div>
      <div class="col-lg-6">
-      Assign Manager  <select>
+      Assign Manager  <select ng-model="ctrl.manager" ng-options="x.name for x in ctrl.employees">
         </select>
-        <button class="btn btn-success btn-small">Save</button>
+        <button class="btn btn-success btn-small" ng-click="ctrl.save()">Save</button>
     </div>
 </div>

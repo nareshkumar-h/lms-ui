@@ -1,4 +1,4 @@
-app.controller('dashboardController', ['leaveService','leaveCounter','userService', '$rootScope', '$http', '$location', function (leaveService,leaveCounter,userService, $rootScope, $http, $location) {
+app.controller('dashboardController', ['leaveService','userService', '$rootScope', '$http', '$location', function (leaveService,userService, $rootScope, $http, $location) {
 
     var self = this;
     self.m=false;
@@ -27,7 +27,7 @@ app.controller('dashboardController', ['leaveService','leaveCounter','userServic
         else{
             self.f=true;
         }
-        leaveCounter.count();
+    
         leaveService.getRollLeaves(self.user.role.id).then(function(d){
             self.leaveForEmployeeRole=d;
         })
@@ -83,7 +83,7 @@ app.controller('dashboardController', ['leaveService','leaveCounter','userServic
     function convertDate(date){
         var monthIndex=date.getMonth();
         monthIndex+=1;
-        var str=date.getDate()+'-'+monthIndex+'-'+date.getFullYear();
+        var str=date.getDate()+'/'+monthIndex+'/'+date.getFullYear();
         return str;
     }
 

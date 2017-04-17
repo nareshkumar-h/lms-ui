@@ -58,6 +58,7 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$wind
             authenticated = true;
             console.log(JSON.stringify(response.data));
             SetCredentials(response.data);
+            $window.location.reload();
             if(response.data.role.id===1)
             {
                 $location.path('/employee/create');
@@ -66,7 +67,7 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$wind
             {
             $location.path('/dashboard')
         }
-        $window.location.reload();
+        
         }
         function errorCallback(error) {
             console.error('Login Failed.')

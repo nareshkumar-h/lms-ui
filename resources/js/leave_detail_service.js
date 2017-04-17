@@ -1,18 +1,35 @@
-app.factory('leaveService',['$http','$q', function ($http,$q) {
+app.factory('leaveService', ['$http', '$q', function ($http, $q) {
 
 
-	  var service = {};
+    var service = {};
 
-    service.getLeaveForEmployee=getLeaveForEmployee;
-    service.getRollLeaves=getRollLeaves;
-    service.save=save;
-
+    service.getLeaveForEmployee = getLeaveForEmployee;
+    service.getRollLeaves = getRollLeaves;
+    service.save = save;
+    service.update = update;
+    service.getRequests = getRequests;
     return service;
 
-    function getRollLeaves(id){
-        
-         var deferred = $q.defer();
-         $http.get(API+'leaveroles/'+id)
+    function getRequests(id) {
+        var deferred = $q.defer();
+        $http.get(API + 'leavedetails/manager/' + id)
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (errResponse) {
+                console.error('Error while fetching the leaves for the manager');
+                deferred.reject(errResponse);
+            }
+            );
+        return deferred.promise;
+
+    }
+
+    function getRollLeaves(id) {
+
+        var deferred = $q.defer();
+        $http.get(API + 'leaveroles/' + id)
             .then(
             function (response) {
                 deferred.resolve(response.data);
@@ -25,15 +42,20 @@ app.factory('leaveService',['$http','$q', function ($http,$q) {
         return deferred.promise;
     }
 
-    function save(leaveDetail){
-        $http.post(API + 'leavedetails', leaveDetail).then(function(response){
-            console.log(response+'');
+    function save(leaveDetail) {
+        $http.post(API + 'leavedetails', leaveDetail).then(function (response) {
+            console.log(response + '');
+        });
+    }
+    function update(leaveDetail) {
+        $http.put(API + 'leavedetails', leaveDetail).then(function (response) {
+            console.log(response + '');
         });
     }
 
-        function getLeaveForEmployee(id) {
+    function getLeaveForEmployee(id) {
         var deferred = $q.defer();
-         $http.get(API + 'leavedetails/'+id)
+        $http.get(API + 'leavedetails/' + id)
             .then(
             function (response) {
                 deferred.resolve(response.data);
@@ -44,7 +66,7 @@ app.factory('leaveService',['$http','$q', function ($http,$q) {
             }
             );
         return deferred.promise;
-      
+
     }
 
 }]);

@@ -142,12 +142,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         .state('teams', {
             url: '/teams',
             templateUrl: 'teams.html',
+            controller: 'teamController as ctrl',
             authenticate: true,
             permission: "type2"//type2
         })
         .state('requests', {
             url: '/requests',
             templateUrl: 'requests.html',
+            controller: 'requestsController as ctrl',
             authenticate: true,
             permission: "type3"//type3
         })

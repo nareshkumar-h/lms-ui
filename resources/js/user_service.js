@@ -3,10 +3,11 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
 
     service.GetAll = GetAll;
     service.GetById = GetById;
-   // service.GetByUsername = GetByUsername;
+    // service.GetByUsername = GetByUsername;
     service.Create = Create;
-   // service.Createlocal=Createlocal;
+    // service.Createlocal=Createlocal;
     service.Update = Update;
+    service.UpdateTeam = UpdateTeam;
     service.Delete = Delete;
 
     return service;
@@ -30,7 +31,7 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
 
     function GetById(id) {
         var deferred = $q.defer();
-         $http.get(API + 'employees/'+id)
+        $http.get(API + 'employees/' + id)
             .then(
             function (response) {
                 deferred.resolve(response.data);
@@ -41,7 +42,31 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
             }
             );
         return deferred.promise;
-      
+
+    }
+
+    function UpdateTeam(eid, mid) {
+        var deferred = $q.defer();
+        var data = $.param({
+            eid: eid,
+            mid: mid
+        });
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+        $http.post(API + 'employees/hierarchy', data, config).then(successCallback, errorCallback);
+        function successCallback(response) {
+            //alert("Successfully updated");
+            deferred.resolve(response.data);
+
+        }
+        function errorCallback(error) {
+           // alert("Error in upadating team.");
+           deferred.reject(error);
+        }
+        return deferred.promise;
     }
 
     /*function GetByUsername(username) {
@@ -53,33 +78,33 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
         return deferred.promise;
     }*/
 
-     /*function Createlocal(user) {
-         var deferred = $q.defer();
+    /*function Createlocal(user) {
+        var deferred = $q.defer();
  
-         // simulate api call with $timeout
-         $timeout(function () {
-             GetByUsername(user.username)
-                 .then(function (duplicateUser) {
-                     if (duplicateUser !== null) {
-                         deferred.resolve({ success: false, message: 'Username "' + user.username + '" is already taken' });
-                     } else {
-                         var users = getUsers();
+        // simulate api call with $timeout
+        $timeout(function () {
+            GetByUsername(user.username)
+                .then(function (duplicateUser) {
+                    if (duplicateUser !== null) {
+                        deferred.resolve({ success: false, message: 'Username "' + user.username + '" is already taken' });
+                    } else {
+                        var users = getUsers();
  
-                         // assign id
-                         var lastUser = users[users.length - 1] || { id: 0 };
-                         user.id = lastUser.id + 1;
+                        // assign id
+                        var lastUser = users[users.length - 1] || { id: 0 };
+                        user.id = lastUser.id + 1;
  
-                         // save to local storage
-                         users.push(user);
-                         setUsers(users);
+                        // save to local storage
+                        users.push(user);
+                        setUsers(users);
  
-                         deferred.resolve({ success: true });
-                     }
-                 });
-         }, 1000);
+                        deferred.resolve({ success: true });
+                    }
+                });
+        }, 1000);
  
-         return deferred.promise;
-     }*/
+        return deferred.promise;
+    }*/
     function Create(user) {
 
         $http.post(API + 'employees', user).then(handleSuccess, handleError('Error creating user'));
