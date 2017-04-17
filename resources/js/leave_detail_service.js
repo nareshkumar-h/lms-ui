@@ -8,7 +8,23 @@ app.factory('leaveService', ['$http', '$q', function ($http, $q) {
     service.save = save;
     service.update = update;
     service.getRequests = getRequests;
+    service.getBalance = getBalance;
     return service;
+
+    function getBalance(id) {
+        var deferred = $q.defer();
+        $http.get(API + 'leavedetails/balance/' + id)
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (errResponse) {
+                console.error('Error while fetching the balance for the employee');
+                deferred.reject(errResponse);
+            }
+            );
+        return deferred.promise;
+    }
 
     function getRequests(id) {
         var deferred = $q.defer();

@@ -35,7 +35,7 @@
                                         <td>{{leaveDetail.noOfDays}}</td>
                                         <td>{{leaveDetail.leaveType.type}}</td>
                                         <td></td>
-                                        <td>{{leaveDetail.status.status}}<span> <button type="button" ng-click="ctrl.approve(leaveDetail)" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
+                                        <td>{{leaveDetail.status.status}}<span ng-if=ctrl.checkStatus(leaveDetail)> <button type="button" ng-click="ctrl.approve(leaveDetail)" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
                             </button>
                             <button type="button" class="btn btn-warning btn-circle" ng-click="ctrl.reject(leaveDetail)"><i class="fa fa-times"></i>
                             </button></span></td>

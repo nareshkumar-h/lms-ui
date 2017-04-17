@@ -7,6 +7,9 @@ app.controller('requestsController', ['leaveService','$rootScope', function (lea
         fetchAllRequests();
 
     }
+    self.checkStatus=function(leaveDetail){
+        return (leaveDetail.status.status==='APPLIED')
+    }
     self.approve=function(leaveDetail){
         leaveDetail.status.id=2;
         leaveDetail.modifiedBy.id=self.user.id;

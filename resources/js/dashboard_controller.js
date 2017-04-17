@@ -1,9 +1,10 @@
-app.controller('dashboardController', ['leaveService','userService', '$rootScope', '$http', '$location', function (leaveService,userService, $rootScope, $http, $location) {
+app.controller('dashboardController', ['leaveService','userService','$rootScope', '$http', '$location', function (leaveService,userService,$rootScope, $http, $location) {
 
     var self = this;
     self.m=false;
     self.f=false;
     self.leaveDetail = {};
+    self.balance={};
     $http.get('data/leaveTypes.json').then(function (response) {
         console.log(JSON.stringify(response.data));
         self.leaveTypes = response.data;
@@ -27,9 +28,8 @@ app.controller('dashboardController', ['leaveService','userService', '$rootScope
         else{
             self.f=true;
         }
-    
-        leaveService.getRollLeaves(self.user.role.id).then(function(d){
-            self.leaveForEmployeeRole=d;
+        leaveService.getBalance(self.user.id).then(function(d){
+            self.balance=d;
         })
     }
     self.applyLeave = function () {
@@ -48,9 +48,14 @@ app.controller('dashboardController', ['leaveService','userService', '$rootScope
     }
     self.onlyWeekDaysPredicate = function (date) {
         var day = date.getDay();
-        return !(day === 0 || day === 6);
+        return !(day === 0 || day === 6||isHoliday(date));
     };
-
+    function isHoliday(date)
+    {
+        dateStr=convertDate(date);
+        return (dateStr==="13/1/2017"||dateStr==="26/1/2017"||dateStr==="14/4/2017"||dateStr==="1/5/2017"||dateStr==="15/8/2017"||dateStr==="25/8/2017"||dateStr==="29/9/2017"||dateStr==="2/10/2017"||dateStr==="18/10/2017"||dateStr==="25/12/2017")
+        
+    }
     function loadCurrentUser() {
         /* userService.GetByUsername($rootScope.globals.currentUser.username)
              .then(function (user) {
