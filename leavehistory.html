@@ -17,15 +17,15 @@
                             <table datatable="ng" width="100%" class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th data-sortable="false">From</th>
-                                        <th data-sortable="false">To</th>
+                                        <th data-sortable="true">From</th>
+                                        <th data-sortable="true">To</th>
                                         <th data-sortable="false">Days</th>
                                         <th data-sortable="false">Leave Type</th>
-                                        <th data-sortable="false">Purpose</th> 
+                                       <th data-sortable="false">Purpose</th>
                                         <th data-sortable="false">Approval Status</th>
-                                        <th data-sortable="false">Reject Reason (If)</th>
+                                       <!-- <th data-sortable="false">Reject Reason (If)</th>-->
                                         <th data-sortable="false">Modified By</th>
-                                        <th data-sortable="false">Modified On</th>
+                                        <th data-sortable="true">Modified On</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,11 +34,11 @@
                                         <td>{{leaveDetail.toDate|date}}</td>
                                         <td>{{leaveDetail.noOfDays}}</td>
                                         <td>{{leaveDetail.leaveType.type}}</td>
-                                        <td></td>
+                                        <td>{{leaveDetail.purpose}}</td>
                                         <td>{{leaveDetail.status.status}}&nbsp&nbsp<span ng-if="ctrl.cancelCheck(leaveDetail)"><button type="button" class="btn btn-link" ng-click="ctrl.cancel(leaveDetail)">Cancel</button></span></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <!--<td></td>-->
+                                        <td>{{leaveDetail.modifiedBy.name}}</td>
+                                        <td>{{leaveDetail.modifiedDate|date}}</td>
                                      
                                     </tr>
                                     

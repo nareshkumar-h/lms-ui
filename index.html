@@ -51,11 +51,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="">RevSys</a>
+                <a class="navbar-brand" href="/">RevSys</a>
             </div>
             <!-- /.navbar-header -->
+        
 
-            <ul class="nav navbar-top-links navbar-right">
+            <ul class="nav navbar-top-links navbar-right" ng-if="isAuthenticated()">
 
 
                 <li class="dropdown pull-right text-muted">
@@ -65,10 +66,10 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href=""><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href=""><i class="fa fa-gear fa-fw"></i>Change Password</a>
+                        <li><a ui-sref="password"><i class="fa fa-gear fa-fw"></i>Change Password</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a ui-sref="login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -157,10 +158,10 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <script type="text/javascript" src="resources/js/angular-datatables.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
@@ -174,6 +175,7 @@
     <script type="text/javascript" src="resources/js/create_controller.js"></script>
     <script type="text/javascript" src="resources/js/edit_controller.js"></script>
     <script type="text/javascript" src="resources/js/team_controller.js"></script>
+    <script type="text/javascript" src="resources/js/password_controller.js"></script>
     <script type="text/javascript" src="resources/js/requests_controller.js"></script>
     <script type="text/javascript" src="resources/js/holiday_service.js"></script>
     <script type="text/javascript" src="resources/js/leave_detail_service.js"></script>

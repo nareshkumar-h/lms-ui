@@ -1,0 +1,25 @@
+[{
+  "id": 1,
+  "type": "Casual Leave",
+  "active": true
+},
+{
+  "id": 2,
+  "type": "Sick Leave",
+  "active": true
+},
+{
+  "id": 3,
+  "type": "Paid Leave",
+  "active": true
+},
+{
+  "id": 5,
+  "type": "Paternity Leave",
+  "active": true
+},
+{
+  "id": 6,
+  "type": "Privileged Leave",
+  "active": true
+}]

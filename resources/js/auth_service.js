@@ -1,7 +1,7 @@
-app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$window','$location','userService', function ($http, $cookies, $rootScope, $timeout,$window,$location,userService) {
+app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$window', '$location', 'userService', function ($http, $cookies, $rootScope, $timeout, $window, $location, userService) {
     var service = {};
     var authenticated = false;
-    var authorized=false;
+    var authorized = false;
     /*var URI='http://52.221.151.239';*/
 
     service.Login = Login;
@@ -9,7 +9,7 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$wind
     service.ClearCredentials = ClearCredentials;
     service.isAuthenticated = isAuthenticated;
     service.setAuth = setAuth;
-    service.isAuthorized=isAuthorized;
+    service.isAuthorized = isAuthorized;
     return service;
 
     function isAuthenticated() {
@@ -20,28 +20,28 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$wind
         authenticated = true;
     }
 
-    function isAuthorized(role){
-            return(role===$rootScope.globals.currentUser.level);
-             
+    function isAuthorized(role) {
+        return (role === $rootScope.globals.currentUser.level);
+
     }
     function Login(username, password, callback) {
         console.log('AuthService');
         console.log(username + ' ' + password);
         /* Dummy authentication for testing, uses $timeout to simulate api call
          ----------------------------------------------*/
-       /* $timeout(function () {
-             var response;
-             userService.GetByUsername(username)
-                 .then(function (user) {
-                     if (user !== null && user.password === password) {
-                         response = { success: true };
-                     } else {
-                         response = { success: false, message: 'Username or password is incorrect' };
-                     }
-                     callback(response);
-                 });
-         }, 1000);
-         authenticated=true;*/
+        /* $timeout(function () {
+              var response;
+              userService.GetByUsername(username)
+                  .then(function (user) {
+                      if (user !== null && user.password === password) {
+                          response = { success: true };
+                      } else {
+                          response = { success: false, message: 'Username or password is incorrect' };
+                      }
+                      callback(response);
+                  });
+          }, 1000);
+          authenticated=true;*/
         /* Use this for real authentication
          ----------------------------------------------*/
         var data = $.param({
@@ -59,47 +59,45 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$wind
             console.log(JSON.stringify(response.data));
             SetCredentials(response.data);
             $window.location.reload();
-            if(response.data.role.id===1)
-            {
+            if (response.data.role.id === 1) {
                 $location.path('/employee/create');
             }
-            else
-            {
-            $location.path('/dashboard')
-        }
-        
+            else {
+                $location.path('/dashboard')
+            }
+
         }
         function errorCallback(error) {
             console.error('Login Failed.')
         }
 
-        
+
 
     }
 
     function SetCredentials(data) {
         console.log('auth.setCredentials');
-        console.log(data.emailId+' '+data.role.name);
+        console.log(data.emailId + ' ' + data.role.name);
         var levelIndex;
-        if(data.role.id===1){
-            levelIndex="System";
+        if (data.role.id === 1) {
+            levelIndex = "System";
         }
-        else if(data.role.id===2||data.role.id===3||data.role.id===4||data.role.id===5||data.role.id===6||data.role.id===7){
-            levelIndex="Level2";
+        else if (data.role.id === 2 || data.role.id === 3 || data.role.id === 4 || data.role.id === 5 || data.role.id === 6 || data.role.id === 7) {
+            levelIndex = "Level2";
         }
-        else if(data.role.id===8||data.role.id==9){
-            levelIndex="Level1";
+        else if (data.role.id === 8 || data.role.id == 9) {
+            levelIndex = "Level1";
         }
-        else{
-            levelIndex="Default";
+        else {
+            levelIndex = "Default";
         }
         console.log(levelIndex);
-        var authdata = Base64.encode(data.emailId + ':' +data.password);
+        var authdata = Base64.encode(data.emailId + ':' + data.password);
 
         $rootScope.globals = {
             currentUser: {
                 object: data,
-                level:levelIndex,
+                level: levelIndex,
                 authdata: authdata
             }
         };
@@ -114,14 +112,17 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout','$wind
     }
 
     function ClearCredentials() {
-        authenticated=false;
-        authorized=false;
-        $rootScope.globals={};
-        $cookies.remove('globals');
-        $http.defaults.headers.common.Authorization = 'Basic';
+           
+            authenticated = false;
+            authorized = false;
+            $rootScope.globals = {};
+            $cookies.remove('globals');
+            $http.defaults.headers.common.Authorization = 'Basic';
         
-        
+     
     }
+
+
 }
 
 

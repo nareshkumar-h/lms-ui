@@ -1,11 +1,18 @@
 
 var app = angular.module('lmsApp', ['ngResource', 'datatables', 'ui.router', 'ngCookies', 'ngMaterial', 'ngMessages']);
 
-app.run(function ($rootScope, $state, authService, $cookies, $http) {
+app.run(function ($rootScope, $state, authService, $cookies, $http,$window,$location) {
     $rootScope.globals = $cookies.getObject('globals') || {};
     if ($rootScope.globals.currentUser) {
         $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         authService.setAuth();
+    }
+    $rootScope.logout=function(){
+        $location.path('login');
+        $window.location.reload();
+    }
+    $rootScope.isAuthenticated=function(){
+        return authService.isAuthenticated();
     }
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
         if (toState.authenticate && !authService.isAuthenticated()) {
@@ -117,6 +124,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             controller: 'dashboardController as ctrl',
             authenticate: true,
             permission: "type1"//type1
+        })
+           .state('password', {
+            url: '/password',
+            templateUrl: 'password.html',
+            controller: 'passController as ctrl',
+            authenticate:true
         })
         .state('history', {
             url: '/history',

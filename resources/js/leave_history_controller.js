@@ -2,56 +2,58 @@ app
     .controller(
     'leaveHistoryController',
     [
-        'leaveService', '$http', 'userService','$rootScope','$location',
-        function (leaveService, $http, userService,$rootScope,$location) {
+        'leaveService', '$http', 'userService', '$rootScope', '$location','$timeout',
+        function (leaveService, $http, userService, $rootScope, $location,$timeout) {
             var self = this;
             self.leaveDetails = [];
-            self.cancelCheck=function(leaveDetail){
-                console.log("leave history controller "+JSON.stringify(leaveDetail));
+            self.cancelCheck = function (leaveDetail) {
+                console.log("leave history controller " + JSON.stringify(leaveDetail));
                 console.log(leaveDetail.toDate);
-                var str=leaveDetail.toDate.split('/');
+                var str = leaveDetail.toDate.split('/');
                 console.log(str);
-                var temp=new Date();
+                var temp = new Date();
                 temp.setDate(str[0]);
-                temp.setMonth(str[1]-1);
+                temp.setMonth(str[1] - 1);
                 temp.setFullYear(str[2]);
                 console.log(temp.toDateString());
-                today=new Date();
-                console.log(temp>=today);
+                today = new Date();
+                console.log(temp >= today);
                 /*dateIndex=new Date().getDate();
                 if(dateIndex<10){dateIndex='0'+dateIndex;}
                 monthIndex=new Date().getMonth()+1;
                 if(monthIndex<10){monthIndex='0'+monthIndex;}
                 yearIndex=new Date().getFullYear();
                 console.log(dateIndex+'/'+monthIndex+'/'+yearIndex);*/
-                return (leaveDetail.status.status==="APPLIED"&&temp>=today);
+                return (leaveDetail.status.status === "APPLIED" && temp >= today);
             }
-            self.cancel=function(leaveDetail){
-                console.log("cancel leave ")
-                leaveDetail.status.id=4;
-                leaveDetail.modifiedBy=self.user;
+            self.cancel = function (leaveDetail) {
+                leaveDetail.status.id = 4;
+                leaveDetail.modifiedBy = self.user;
                 leaveService.update(leaveDetail);
                 fetchAllLeaveDetails();
-
-            }
-            initController();
-            function initController() {
-                loadCurrentUser();
-                fetchAllLeaveDetails();
+            
 
             }
 
             function fetchAllLeaveDetails() {
-                leaveService.getLeaveForEmployee(self.user.id).then(function (d) {
+                $timeout(function(){leaveService.getLeaveForEmployee(self.user.id).then(function (d) {
                     self.leaveDetails = d;
-                    console.log(JSON.stringify(self.leaveDetails));
-                });
-            };
-
-            function loadCurrentUser() {
-               self.user=$rootScope.globals.currentUser.object;
+                });},500);
             }
+            
+                initController();
+                function initController() {
+                    loadCurrentUser();
+                    fetchAllLeaveDetails();
+
+                }
+
           
 
+                function loadCurrentUser() {
+                    self.user = $rootScope.globals.currentUser.object;
+                }
 
-        }]);
+
+
+            }]);

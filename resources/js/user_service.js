@@ -8,6 +8,7 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
     // service.Createlocal=Createlocal;
     service.Update = Update;
     service.UpdateTeam = UpdateTeam;
+    service.UpdatePassword=UpdatePassword;
     service.Delete = Delete;
 
     return service;
@@ -59,6 +60,32 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
         $http.post(API + 'employees/hierarchy', data, config).then(successCallback, errorCallback);
         function successCallback(response) {
             //alert("Successfully updated");
+            deferred.resolve(response.data);
+
+        }
+        function errorCallback(error) {
+           // alert("Error in upadating team.");
+           deferred.reject(error);
+        }
+        return deferred.promise;
+    }
+
+    function UpdatePassword(emailId,oldPassword,newPassword) {
+        var deferred = $q.defer();
+        var data = $.param({
+            emailId: emailId,
+            oldPassword: oldPassword,
+            newPassword:newPassword
+        });
+        var config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+        $http.post(API + 'employees/password', data, config).then(successCallback, errorCallback);
+        function successCallback(response) {
+            //alert("Successfully updated");
+
             deferred.resolve(response.data);
 
         }
