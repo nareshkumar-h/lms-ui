@@ -68,6 +68,7 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$win
 
         }
         function errorCallback(error) {
+            alert('Error in login');
             console.error('Login Failed.')
         }
 

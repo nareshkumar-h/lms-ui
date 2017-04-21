@@ -1,9 +1,11 @@
+<style>
+.error-text-log{color:red;}
+</style>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Create a new Employee</h1>
     </div>
 </div>
-
 <div class="row">
     <div class="col-lg-6 col-lg-offset-2">
         <div class="panel panel-default">
@@ -13,20 +15,36 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form role="form" name="form" ng-submit="ctrl.save()">
+                        <form role="form" name="empForm" ng-submit="ctrl.save()">
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Enter employee code here." ng-model="ctrl.employee.code" required>
+                                <input class="form-control" type="text" placeholder="Enter employee code here." ng-model="ctrl.employee.code" name="code" required ng-minlength="4" maxlength="30">
+                           <div class="error-text-log" ng-messages=" empForm.code.$error " ng-show="empForm.code.$touched && !empForm.code.$focused">
+                            <span ng-message="minlength">Requires a valid employee code </span>
+                            <span ng-message="maxlength">Employee Code should not exceed 30 characters</span>
+                            </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Enter employee name here." ng-model="ctrl.employee.name" required>
+                                <input class="form-control" type="text" placeholder="Enter employee name here." ng-model="ctrl.employee.name" required name="name"  ng-maxlength="70" ng-pattern="/^[a-zA-Z0-9.]*$/">
+                            <div class="error-text-log" ng-messages=" empForm.name.$error " ng-show="empForm.name.$touched && !empForm.name.$focused">
+                            <span ng-message="pattern">Name must contain alphabets and numbers only</span>
+                            <span ng-message="maxlength">Name should not exceed 100 characters</span>
+                            </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="email" placeholder="Enter employee email ID here." ng-model="ctrl.employee.emailId" required>
+                                <input class="form-control" type="email" placeholder="Enter employee email ID here." ng-model="ctrl.employee.emailId" required name="email" ng-maxlength="250" ng-minlength="5" maxlength="255" ng-required="true" ng-pattern="/^[a-z0-9A-Z]+[a-zA-Z0-9._]*@[a-zA-Z]+(\.[a-zA-Z]+)*(\.[a-zA-Z]{2,5})$/" no-space> 
+                            <div class="error-text-log" ng-messages=" empForm.email.$error " ng-show="empForm.email.$touched && !empForm.email.$focused">
+                            <span ng-message="pattern">Requires a valid email</span>
+                            <span  ng-message="minlength"> Requires a valid email </span>
+                            <span ng-message="maxlength">Email should be limited with 250 chars</span>
+                            </div>
                             </div>
                             <div class="form-group">
                                 <p class="help-block">Give a password for the employee here.</p>
-                                <input class="form-control" type="password" ng-model="ctrl.employee.password" required>
-
+                                <input class="form-control" type="password" ng-model="ctrl.employee.password" required name="passward" ng-maxlength="20" avoid-quotes ng-required="true" ng-minlength="6" no-space >
+ <div class="error-text-log" ng-messages=" empForm.passward.$error " ng-show="empForm.passward.$touched && !empForm.passward.$focused">
+                            <span ng-message="minlength"> Your password is not long enough. We need 6 characters at least with no spaces</span>
+                            <span ng-message="maxlength"> Password is too long</span>
+                            </div>
                             </div>
                             <div class="form-group">
                                 Gender:
@@ -38,14 +56,20 @@
                                             </label>
                             </div>
                             <div class="form-group">
-                                Role
-                                <select name="role" ng-model="ctrl.employee.role" ng-options="x.name for x in ctrl.roles">   							
-  					            </select>
+                                Role:
+                                <select name="role" ng-model="ctrl.employee.role" ng-options="x.name for x in ctrl.roles">                              
+                                </select>
                             </div>
                             <div class="form-group">
-                            Mobile: <input class="form-control" type="text" placeholder="Enter employee mobile number here." ng-model="ctrl.employee.mobileNo" required>
+                                Mobile:
+                                <input class="form-control" type="text" placeholder="Enter employee mobile number here." ng-model="ctrl.employee.mobileNo" required maxlength="10" ng-minlength="10"  ng-maxlength="10" avoid-dots ng-required="true" class="form-control" no-space is-number  >
+                            <div class="error-text-log" ng-messages="empForm.mobile.$error" ng-if="empForm.mobile.$touched && !empForm.mobile.$focused ">
+                                        <span ng-message="minlength"> Contact number should only be 10 digits</span>
+                                        <span ng-message="maxlength">Contact number should only be 10 digits</span>
+                                        <span ng-message="pattern">Invalid contact number</span>
+                                    </div>
                             </div>
-                            <input type="submit" class="btn btn-success" value="Save"/>
+                            <input type="submit" class="btn btn-success" ng-disabled="empForm.$invalid" value="Save"/>
                             <button type="reset" class="btn btn-default">Clear</button>
                         </form>
                     </div>

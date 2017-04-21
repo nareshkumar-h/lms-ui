@@ -8,19 +8,23 @@ function initController(){
 }
 
     self.update = function () {
-     
+        if(self.newPassword===self.confirmPassword)
+        {
         console.log('Password Change called');
         userService.UpdatePassword(self.user.emailId,self.oldPassword,self.newPassword)
             .then(
             function(){
-                alert('Successfully saved')
                 initController();
             },
             function (errResponse) {
-                alert('Error while saving');
+                
             }
             );
-
+        }
+        else
+        {
+            alert('Passwords do not match!');
+        }
 
     };
 

@@ -8,7 +8,7 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
     // service.Createlocal=Createlocal;
     service.Update = Update;
     service.UpdateTeam = UpdateTeam;
-    service.UpdatePassword=UpdatePassword;
+    service.UpdatePassword = UpdatePassword;
     service.Delete = Delete;
 
     return service;
@@ -64,18 +64,18 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
 
         }
         function errorCallback(error) {
-           // alert("Error in upadating team.");
-           deferred.reject(error);
+            // alert("Error in upadating team.");
+            deferred.reject(error);
         }
         return deferred.promise;
     }
 
-    function UpdatePassword(emailId,oldPassword,newPassword) {
+    function UpdatePassword(emailId, oldPassword, newPassword) {
         var deferred = $q.defer();
         var data = $.param({
             emailId: emailId,
             oldPassword: oldPassword,
-            newPassword:newPassword
+            newPassword: newPassword
         });
         var config = {
             headers: {
@@ -87,11 +87,13 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
             //alert("Successfully updated");
 
             deferred.resolve(response.data);
+            alert('Password updated!');
 
         }
         function errorCallback(error) {
-           // alert("Error in upadating team.");
-           deferred.reject(error);
+            // alert("Error in upadating team.");
+            deferred.reject(error);
+            alert('Error in updating password.');
         }
         return deferred.promise;
     }
@@ -134,7 +136,21 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
     }*/
     function Create(user) {
 
-        $http.post(API + 'employees', user).then(handleSuccess, handleError('Error creating user'));
+        var deferred = $q.defer();
+        $http.post(API + 'employees', user)
+            .then(
+            function (response) {
+                alert("Successfully saved.")
+                deferred.resolve(response.data);
+            },
+            function (errResponse) {
+                alert('Error while Saveing user');
+                
+                deferred.reject(errResponse);
+            }
+            );
+        return deferred.promise;
+
     }
 
     function Update(user) {
@@ -143,9 +159,11 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
             .then(
             function (response) {
                 deferred.resolve(response.data);
+                alert('Successfully updated.');
             },
             function (errResponse) {
                 console.error('Error while updating User');
+                alert('Error in updating!');
                 deferred.reject(errResponse);
             }
             );
@@ -159,9 +177,11 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
             .then(
             function (response) {
                 deferred.resolve(response.data);
+                alert('User deleted successfully!');
             },
             function (errResponse) {
                 console.error('Error while deleting User');
+                alert('Error in deleting records!');
                 deferred.reject(errResponse);
             }
             );

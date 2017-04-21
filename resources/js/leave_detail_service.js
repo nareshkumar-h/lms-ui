@@ -61,11 +61,13 @@ app.factory('leaveService', ['$http', '$q', function ($http, $q) {
     function save(leaveDetail) {
         $http.post(API + 'leavedetails', leaveDetail).then(function (response) {
             console.log(response + '');
+            alert('Request Saved.')
         });
     }
     function update(leaveDetail) {
         $http.put(API + 'leavedetails', leaveDetail).then(function (response) {
             console.log(response + '');
+            alert('Updated sucessfully');
         });
     }
 
