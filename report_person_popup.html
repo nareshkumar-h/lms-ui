@@ -1,0 +1,31 @@
+<div class="modal-dialog">
+    <!--<div class="modal-content">-->
+
+        <!--Close Form Button-->
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="ctrl.cancel()">&times;</button>
+            <h4 class="modal-title">Select a Report Person</h4>
+        </div>
+
+       <div class="modal-body">
+           <table class="table table-responsive">
+               <tr ng-repeat="manager in ctrl.managers">
+        
+           <td><strong>{{manager.name}}<strong></td> 
+           <td>with</td> 
+           <td> {{manager.emailId}}</td> 
+           <td> -</td>
+         <td> {{manager.role.name}}</td>
+         <td><button type="button" class="btn btn-success btn-circle" ng-click="ctrl.save(manager.id)"><i class="fa fa-check fa-lg"></i></td>
+        
+               </tr>
+           </table>
+                        
+         </div>
+<hr>
+<div class="modal-header">
+    <strong>Note:</strong> When applying a new report person for the employee, It overrides the previous reporting person!
+</div>
+
+    <!--</div>-->
+</div>

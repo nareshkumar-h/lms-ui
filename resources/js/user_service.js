@@ -2,6 +2,8 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
     var service = {};
 
     service.GetAll = GetAll;
+    service.GetManagers = GetManagers;
+    service.GetAll2 = GetAll2;
     service.GetById = GetById;
     // service.GetByUsername = GetByUsername;
     service.Create = Create;
@@ -24,6 +26,38 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
             },
             function (errResponse) {
                 console.error('Error while fetching Users');
+                deferred.reject(errResponse);
+            }
+            );
+        return deferred.promise;
+    }
+
+    function GetAll2() {
+
+        var deferred = $q.defer();
+        $http.get(API + 'employees/api')
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (errResponse) {
+                console.error('Error while fetching Users');
+                deferred.reject(errResponse);
+            }
+            );
+        return deferred.promise;
+    }
+
+    function GetManagers() {
+
+        var deferred = $q.defer();
+        $http.get(API + 'employees/managers')
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function (errResponse) {
+                console.error('Error while fetching Managers');
                 deferred.reject(errResponse);
             }
             );
@@ -144,8 +178,8 @@ app.factory('userService', ['$timeout', '$filter', '$q', '$http', function ($tim
                 deferred.resolve(response.data);
             },
             function (errResponse) {
-                alert('Error while Saveing user');
-                
+                alert('Error while Saving user');
+
                 deferred.reject(errResponse);
             }
             );

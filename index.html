@@ -18,6 +18,7 @@
 
     <!-- Custom CSS -->
     <link href="resources/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="resources/dist/css/xeditable.min.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="resources/vendor/morrisjs/morris.css" rel="stylesheet">
@@ -33,7 +34,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-    var API="http://localhost:5000/"
+        var API = "http://115.160.252.170:5000/"
     </script>
 
 </head>
@@ -51,10 +52,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">RevSys</a>
+                <a class="navbar-brand" href="#">RevSys</a>
             </div>
             <!-- /.navbar-header -->
-        
+
 
             <ul class="nav navbar-top-links navbar-right" ng-if="isAuthenticated()">
 
@@ -93,35 +94,31 @@
                             <!-- /input-group -->
                         </li>
                         <li access="group1">
-                            <a ui-sref="dashboard" ><i class="fa fa-home fa-fw"></i> Home</a>
+                            <a ui-sref="dashboard"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
 
                         <li>
                             <a ui-sref="holidaymaster"><i class="fa fa-table fa-fw"></i>Holiday Master</a>
                         </li>
+
                         <li access="group1">
                             <a ui-sref="history"><i class="fa fa-files-o fa-fw"></i>Leave History</a>
-                        
+
                         </li>
                         <li access="group3">
-                            <a ui-sref="requests" ><i class="fa fa-bell fa-fw"></i>Team Requests</a>
+                            <a ui-sref="requests"><i class="fa fa-bell fa-fw"></i>Team Requests</a>
                         </li>
                         <li access="group2">
-                            <a ui-sref="employee/create" ><i class="fa fa-user fa-fw"></i>Create an Employee</a>
+                            <a ui-sref="empconsole"><i class="fa fa-gamepad fa-fw fa-rotate-90"></i>Employee Console</a>
                         </li>
-                        <li access="group2">
-                            <a ui-sref="employee/edit" ><i class="fa fa-users fa-fw"></i>Manage Employees</a>
-                        </li>
-                        <li access="group2">
-                            <a ui-sref="teams"><i class="fa fa-compress fa-fw"></i>Manage Teams</a>
-                        </li>
-                        
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
 
         <div id="page-wrapper">
             <div ui-view></div>
@@ -167,21 +164,23 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script type="text/javascript" src="resources/js/angular-datatables.min.js" ></script>
+    <script type="text/javascript" src="resources/js/angular-datatables.min.js"></script>
+    <script type="text/javascript" src="resources/js/xeditable.min.js"></script>
+    <script type="text/javascript" src="resources/js/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="resources/js/app.js"></script>
     <script type="text/javascript" src="resources/js/holiday_controller.js"></script>
     <script type="text/javascript" src="resources/js/dashboard_controller.js"></script>
     <script type="text/javascript" src="resources/js/leave_history_controller.js"></script>
-    <script type="text/javascript" src="resources/js/create_controller.js"></script>
-    <script type="text/javascript" src="resources/js/edit_controller.js"></script>
-    <script type="text/javascript" src="resources/js/team_controller.js"></script>
     <script type="text/javascript" src="resources/js/password_controller.js"></script>
     <script type="text/javascript" src="resources/js/requests_controller.js"></script>
+    <script type="text/javascript" src="resources/js/report_person_controller.js"></script>
+    <script type="text/javascript" src="resources/js/empconsole_controller.js"></script>
     <script type="text/javascript" src="resources/js/holiday_service.js"></script>
     <script type="text/javascript" src="resources/js/leave_detail_service.js"></script>
     <script type="text/javascript" src="resources/js/auth_service.js"></script>
     <script type="text/javascript" src="resources/js/login_controller.js"></script>
     <script type="text/javascript" src="resources/js/user_service.js"></script>
+    <script type="text/javascript" src="resources/js/sharedata_service.js"></script>
     <script type="text/javascript" src="resources/js/sort_by_month.js"></script>
 
 </body>

@@ -1,4 +1,4 @@
-app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$window', '$location', 'userService', function ($http, $cookies, $rootScope, $timeout, $window, $location, userService) {
+app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$window', '$location','userService', function ($http, $cookies, $rootScope, $timeout, $window, $location,userService) {
     var service = {};
     var authenticated = false;
     var authorized = false;
@@ -57,10 +57,10 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$win
         function successCallback(response) {
             authenticated = true;
             console.log(JSON.stringify(response.data));
-            SetCredentials(response.data);
             $window.location.reload();
+            SetCredentials(response.data);
             if (response.data.role.id === 1) {
-                $location.path('/employee/create');
+                $location.path('/empconsole');
             }
             else {
                 $location.path('/dashboard')

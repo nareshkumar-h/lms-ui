@@ -1,17 +1,21 @@
 
-var app = angular.module('lmsApp', ['ngResource', 'datatables', 'ui.router', 'ngCookies', 'ngMaterial', 'ngMessages']);
+var app = angular.module('lmsApp', ['ngResource', 'datatables', 'ui.router', 'ngCookies', 'ngMaterial', 'ngMessages','xeditable','ngAnimate','ui.bootstrap']);
 
-app.run(function ($rootScope, $state, authService, $cookies, $http,$window,$location) {
+app.run(function ($rootScope, $state, authService, $cookies, $http, $window, $location,editableOptions) {
     $rootScope.globals = $cookies.getObject('globals') || {};
+    editableOptions.theme='bs3';
     if ($rootScope.globals.currentUser) {
         $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         authService.setAuth();
     }
-    $rootScope.logout=function(){
+    $rootScope.goBack=function(){
+        $window.history.back();
+    }
+    $rootScope.logout = function () {
         $location.path('login');
         $window.location.reload();
     }
-    $rootScope.isAuthenticated=function(){
+    $rootScope.isAuthenticated = function () {
         return authService.isAuthenticated();
     }
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
@@ -19,7 +23,7 @@ app.run(function ($rootScope, $state, authService, $cookies, $http,$window,$loca
             // User isn’t authenticated
             $state.transitionTo("login");
             event.preventDefault();
-            console.log(authService.isAuthenticated());
+            console.log($rootScope.isAuthenticated());
         }
         if (toState.permission && toState.permission === "type1") {
             console.log("permission called" + toState.permission);
@@ -125,11 +129,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             authenticate: true,
             permission: "type1"//type1
         })
-           .state('password', {
+        .state('password', {
             url: '/password',
             templateUrl: 'password.html',
             controller: 'passController as ctrl',
-            authenticate:true
+            authenticate: true
         })
         .state('history', {
             url: '/history',
@@ -138,24 +142,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             authenticate: true,
             permission: "type1"//type1
         })
-        .state('employee/create', {
-            url: '/employee/create',
-            templateUrl: 'create.html',
-            controller: 'createController as ctrl',
-            authenticate: true,
-            permission: "type2"//type2
-        })
-        .state('employee/edit', {
-            url: '/employee/edit',
-            templateUrl: 'edit.html',
-            controller: 'editController as ctrl',
-            authenticate: true,
-            permission: "type2"//type2
-        })
-        .state('teams', {
-            url: '/teams',
-            templateUrl: 'teams.html',
-            controller: 'teamController as ctrl',
+        .state('empconsole', {
+            url: '/empconsole',
+            templateUrl: 'empconsole.html',
+            controller: 'empConsoleController as ctrl',
             authenticate: true,
             permission: "type2"//type2
         })

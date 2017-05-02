@@ -1,20 +1,17 @@
 <style>
 .error-text-log{color:red;}
 </style>
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Create a new Employee</h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6 col-lg-offset-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Create a new employee here(All fields are required).
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-12">
+<div class="modal-dialog">
+    <!--<div class="modal-content">-->
+
+        <!--Close Form Button-->
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="ctrl.cancel()">&times;</button>
+            <h4 class="modal-title">Create a new Employee</h4>
+        </div>
+
+       <div class="modal-body">
+
                         <form role="form" name="empForm" ng-submit="ctrl.save()">
                             <div class="form-group">
                                 <input class="form-control" type="text" placeholder="Enter employee code here." ng-model="ctrl.employee.code" name="code" required ng-minlength="4" maxlength="30">
@@ -24,7 +21,7 @@
                             </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Enter employee name here." ng-model="ctrl.employee.name" required name="name"  ng-maxlength="70" ng-pattern="/^[a-zA-Z0-9.]*$/">
+                                <input class="form-control" type="text" placeholder="Enter employee name here." ng-model="ctrl.employee.name" required name="name"  ng-maxlength="70" ng-pattern="/^[a-zA-Z0-9. ]*$/">
                             <div class="error-text-log" ng-messages=" empForm.name.$error " ng-show="empForm.name.$touched && !empForm.name.$focused">
                             <span ng-message="pattern">Name must contain alphabets and numbers only</span>
                             <span ng-message="maxlength">Name should not exceed 100 characters</span>
@@ -73,8 +70,7 @@
                             <button type="reset" class="btn btn-default">Clear</button>
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+    <!--</div>-->
 </div>
