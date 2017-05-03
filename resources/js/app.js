@@ -1,19 +1,19 @@
 
-var app = angular.module('lmsApp', ['ngResource', 'datatables', 'ui.router', 'ngCookies', 'ngMaterial', 'ngMessages','xeditable','ngAnimate','ui.bootstrap']);
+var app = angular.module('lmsApp', ['ngResource', 'datatables', 'ui.router', 'ngCookies', 'ngMaterial', 'ngMessages', 'xeditable', 'ngAnimate', 'ui.bootstrap']);
 
-app.run(function ($rootScope, $state, authService, $cookies, $http, $window, $location,editableOptions) {
+app.run(function ($rootScope, $state, authService, $cookies, $http, $window, $location, editableOptions) {
     $rootScope.globals = $cookies.getObject('globals') || {};
-    editableOptions.theme='bs3';
+    editableOptions.theme = 'bs3';
     if ($rootScope.globals.currentUser) {
         $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         authService.setAuth();
     }
-    $rootScope.goBack=function(){
+    $rootScope.goBack = function () {
         $window.history.back();
     }
     $rootScope.logout = function () {
-        $location.path('login');
         $window.location.reload();
+        $state.transitionTo('main.login',null,{reload:true});
     }
     $rootScope.isAuthenticated = function () {
         return authService.isAuthenticated();
@@ -21,7 +21,7 @@ app.run(function ($rootScope, $state, authService, $cookies, $http, $window, $lo
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
         if (toState.authenticate && !authService.isAuthenticated()) {
             // User isn’t authenticated
-            $state.transitionTo("login");
+            $state.transitionTo("main.login");
             event.preventDefault();
             console.log($rootScope.isAuthenticated());
         }
@@ -110,11 +110,16 @@ app.directive('access', ['$rootScope', 'authService',
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $locationProvider.hashPrefix('');
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise('/main/dashboard');
     $stateProvider
 
         // HOME STATES AND NESTED VIEWS ========================================
-        .state('holidaymaster', {
+        .state('main', {
+            url: '/main',
+            templateUrl: 'main.html'
+        })
+
+        .state('main.holidaymaster', {
             url: '/holidaymaster',
             templateUrl: 'holidays.html',
             controller: 'holidayController as ctrl',
@@ -122,41 +127,41 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         })
 
 
-        .state('dashboard', {
+        .state('main.dashboard', {
             url: '/dashboard',
             templateUrl: 'dashboard.html',
             controller: 'dashboardController as ctrl',
             authenticate: true,
             permission: "type1"//type1
         })
-        .state('password', {
+        .state('main.password', {
             url: '/password',
             templateUrl: 'password.html',
             controller: 'passController as ctrl',
             authenticate: true
         })
-        .state('history', {
+        .state('main.history', {
             url: '/history',
             templateUrl: 'leavehistory.html',
             controller: 'leaveHistoryController as ctrl',
             authenticate: true,
             permission: "type1"//type1
         })
-        .state('empconsole', {
+        .state('main.empconsole', {
             url: '/empconsole',
             templateUrl: 'empconsole.html',
             controller: 'empConsoleController as ctrl',
             authenticate: true,
             permission: "type2"//type2
         })
-        .state('requests', {
+        .state('main.requests', {
             url: '/requests',
             templateUrl: 'requests.html',
             controller: 'requestsController as ctrl',
             authenticate: true,
             permission: "type3"//type3
         })
-        .state('login', {
+        .state('main.login', {
             url: '/login',
             templateUrl: 'login.html',
             controller: 'loginController as ctrl',

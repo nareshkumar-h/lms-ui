@@ -1,4 +1,4 @@
-app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$window', '$location','userService', function ($http, $cookies, $rootScope, $timeout, $window, $location,userService) {
+app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$window','$state', '$location','userService', function ($http, $cookies, $rootScope, $timeout, $window,$state, $location,userService) {
     var service = {};
     var authenticated = false;
     var authorized = false;
@@ -57,13 +57,17 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$win
         function successCallback(response) {
             authenticated = true;
             console.log(JSON.stringify(response.data));
-            $window.location.reload();
             SetCredentials(response.data);
+        
             if (response.data.role.id === 1) {
-                $location.path('/empconsole');
+                $state.transitionTo('main',null,{reload:true});
+                $state.transitionTo('main.empconsole',null,{reload:true});
+                //$location.path('/main/empconsole');
             }
             else {
-                $location.path('/dashboard')
+                $state.transitionTo('main',null,{reload:true});
+                $state.transitionTo('main.dashboard',null,{reload:true});
+                //$location.path('/main/dashboard')
             }
 
         }
@@ -113,7 +117,7 @@ app.factory('authService', ['$http', '$cookies', '$rootScope', '$timeout', '$win
     }
 
     function ClearCredentials() {
-           
+            
             authenticated = false;
             authorized = false;
             $rootScope.globals = {};

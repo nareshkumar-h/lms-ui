@@ -48,7 +48,7 @@ app.controller('dashboardController', ['leaveService', 'userService', '$rootScop
         console.log(self.leaveDetail);
         leaveService.save(self.leaveDetail);
         console.log('Applied');
-        $location.path('/history');
+        $location.path('/main/history');
     }
     self.onlyWeekDaysPredicate = function (date) {
         var day = date.getDay();
