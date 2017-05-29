@@ -15,7 +15,7 @@ app.controller('reportPersonController', ['$rootScope','$location','userService'
     self.save = function (mid) {
         eid = shareDataService.getEId();
         if (eid === mid) {
-            alert('You can not report to yoursef.')
+            alert('You can not report to yourself.')
         }
         else if (eid === $rootScope.globals.currentUser.object.id) {
             alert('You can not change your own reporting person. Contact some other authorized user.')
